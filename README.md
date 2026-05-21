@@ -12,13 +12,13 @@ switch between them in-session.
 Add Authio to your Xcode project:
 
 1. **File → Add Package Dependencies…**
-2. Enter `https://github.com/tcast/authio_swift.git`
+2. Enter `https://github.com/authio-com/authio_swift.git`
 3. Pick the latest release.
 
 Or in your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/tcast/authio_swift.git", from: "0.2.0")
+.package(url: "https://github.com/authio-com/authio_swift.git", from: "0.2.0")
 ```
 
 ## Requirements
