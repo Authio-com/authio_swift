@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => "MIT", :file => "LICENSE" }
   s.author           = { "Authio" => "releases@authio.com" }
   s.source           = {
-    :git => "https://github.com/tcast/authio_swift.git",
+    :git => "https://github.com/authio-com/authio_swift.git",
     :tag => "v#{s.version}"
   }
 
