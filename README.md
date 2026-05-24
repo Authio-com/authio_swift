@@ -7,6 +7,10 @@
 
 # authio-swift
 
+> Part of **[Authio Lobby](https://authio.com/products/lobby)** —
+> Authio's drop-in passwordless authentication. Learn more at
+> https://authio.com/products/lobby.
+
 The official Swift SDK for [Authio](https://authio.com) — passwordless
 authentication for iOS, macOS, and visionOS apps. Native passkeys via
 `ASAuthorizationController`, magic links, OAuth (Google / Microsoft /
