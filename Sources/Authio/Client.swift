@@ -19,6 +19,7 @@ public enum Authio {
 
         let http: HTTPClient
         public let keychain: AuthioKeychain
+        private let jwtVerifier: JwtVerifier
 
         /// - Parameter publishableKey: project's `pk_live_…` or
         ///   `pk_test_…` key from the Authio dashboard. Safe to embed in
@@ -45,6 +46,7 @@ public enum Authio {
                 userAgent: "authio-swift/0.2.0"
             )
             self.keychain = keychain
+            self.jwtVerifier = JwtVerifier(apiURL: apiURL, session: urlSession)
         }
 
         /// Test-only initialiser that accepts the URLSession seam
@@ -66,6 +68,7 @@ public enum Authio {
                 userAgent: "authio-swift/0.2.0"
             )
             self.keychain = keychain
+            self.jwtVerifier = JwtVerifier(apiURL: apiURL, session: session)
         }
 
         // ----------------------------------------------------------
@@ -73,25 +76,11 @@ public enum Authio {
         // ----------------------------------------------------------
 
         /// Call on app launch with the cached session. Returns true if
-        /// the access token is still valid (server checked). False
-        /// means the caller should re-authenticate.
-        ///
-        /// Roadmap: local JWT verification against `/v1/jwks` cached
-        /// for 10 minutes. For v0.2 we round-trip to the server.
+        /// the access token is still valid. Verifies locally against
+        /// cached JWKS (10-minute TTL) — no `/v1/me` round-trip.
         public func verify(session: AuthioSession) async throws -> Bool {
-            // Fast path: locally expired (skip the network round-trip).
             if session.expiresAt < Date() { return false }
-            do {
-                let _: User = try await http.send(
-                    "GET",
-                    "/v1/me",
-                    bearer: session.accessToken
-                )
-                return true
-            } catch AuthioError.requestFailed(let status, _, _, _)
-                where status == 401 || status == 403 {
-                return false
-            }
+            return try await jwtVerifier.verify(accessToken: session.accessToken)
         }
 
         // ----------------------------------------------------------
