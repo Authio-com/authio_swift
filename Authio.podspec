@@ -1,6 +1,8 @@
+# Deprecated: CocoaPods trunk publishing was removed after trunk sunset.
+# This podspec supports git-sourced installs only (see README).
 Pod::Spec.new do |s|
   s.name             = "Authio"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "Authio Swift SDK — passwordless, multi-org auth for iOS / macOS / visionOS."
   s.description      = <<-DESC
     Authio is the developer-first passwordless auth platform for B2B SaaS.

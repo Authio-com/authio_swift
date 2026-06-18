@@ -32,6 +32,19 @@ Or in your `Package.swift`:
 .package(url: "https://github.com/authio-com/authio_swift.git", from: "0.2.0")
 ```
 
+### CocoaPods (legacy)
+
+CocoaPods trunk publishing is deprecated (trunk sunset). Prefer SPM above.
+
+If you still need CocoaPods, point at the git tag directly in your
+`Podfile` — no trunk registry required:
+
+```ruby
+pod 'Authio', :git => 'https://github.com/authio-com/authio_swift.git', :tag => 'v0.2.0'
+```
+
+`Authio.podspec` is kept for git-sourced installs only.
+
 ## Requirements
 
 - **iOS 16+**, **macOS 13+**, **visionOS 1+**
